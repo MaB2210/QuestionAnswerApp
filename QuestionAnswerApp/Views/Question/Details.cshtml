@@ -1,0 +1,62 @@
+﻿@model QuestionAnswerApp.Models.QuestionModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>QuestionModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-info">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Delete</a>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+<div>
+    <h2>Answers:</h2>
+    <ul>
+        @foreach (var answer in Model.Answers)
+        {
+            <li class="mb-3">
+                <div>
+                    <p>Answer:</p>
+                    <span style="white-space: pre-wrap">@answer.Answer
+                        <a asp-controller="Answer" asp-action="Delete" asp-route-id="@answer.Id" asp-route-questionID="@answer.QuestionID" class="btn btn-danger">Delete</a>
+                    </span><br>
+                </div>
+            </li>
+        }
+    </ul>
+    <a asp-controller="Answer" asp-action="Create" asp-route-questionId="@Model.Id" class="btn btn-success">Add new answer</a>
+</div>
+
